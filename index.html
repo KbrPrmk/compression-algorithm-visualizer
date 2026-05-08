@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sıkıştırma Algoritmaları</title>
+<link rel="stylesheet" href="algo.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="algo.js"></script>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Sıkıştırma Algoritmaları</h1>
+    <p>Huffman Encoding & LZW Encoding</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('huffman')">Huffman</button>
+    <button class="tab-btn" onclick="switchTab('lzw')">LZW</button>
+    <button class="tab-btn" onclick="switchTab('compare')">Karşılaştır</button>
+  </div>
+
+  <!-- HUFFMAN PANEL -->
+  <div class="panel active" id="panel-huffman">
+    <div class="input-section">
+      <label class="input-label">Metin Gir</label>
+      <div class="input-row">
+        <input type="text" class="text-input" id="huff-input" value="merhaba dünya" placeholder="Kodlanacak metni girin...">
+        <button class="run-btn" onclick="runHuffman()">▶ Çalıştır</button>
+      </div>
+    </div>
+
+    <div id="huff-results" style="display:none">
+      <div class="stats-row" id="huff-stats"></div>
+
+      <div class="section-header">
+        <h3>Karakter Frekansları</h3>
+        <div class="section-line"></div>
+      </div>
+      <div class="freq-table" id="huff-freq"></div>
+
+      <div class="section-header">
+        <h3>Huffman Ağacı</h3>
+        <div class="section-line"></div>
+      </div>
+      <div class="tree-container">
+        <svg id="huffman-tree-svg"></svg>
+      </div>
+
+      <div class="section-header">
+        <h3>Kod Tablosu</h3>
+        <div class="section-line"></div>
+      </div>
+      <div class="code-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Karakter</th>
+              <th>Frekans</th>
+              <th>Huffman Kodu</th>
+              <th>Bit Uzunluğu</th>
+              <th>Tasarruf</th>
+            </tr>
+          </thead>
+          <tbody id="huff-code-table"></tbody>
+        </table>
+      </div>
+
+      <div class="section-header">
+        <h3>Kodlanmış Çıktı</h3>
+        <div class="section-line"></div>
+      </div>
+      <div class="encoded-output" id="huff-encoded"></div>
+    </div>
+  </div>
+
+  <!-- LZW PANEL -->
+  <div class="panel" id="panel-lzw">
+    <div class="input-section">
+      <label class="input-label">Metin Gir</label>
+      <div class="input-row">
+        <input type="text" class="text-input" id="lzw-input" value="ABABABABABAB" placeholder="Kodlanacak metni girin...">
+        <button class="run-btn" onclick="runLZW()">▶ Çalıştır</button>
+      </div>
+    </div>
+
+    <div id="lzw-results" style="display:none">
+      <div class="stats-row" id="lzw-stats"></div>
+
+      <div class="section-header">
+        <h3>Kodlama Adımları</h3>
+        <div class="section-line"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:60px 1fr 1fr 120px;gap:12px;padding:8px 16px;margin-bottom:8px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)">
+        <span>#</span><span>Buffer</span><span>Çıktı Kodu</span><span>Yeni Giriş</span>
+      </div>
+      <div class="lzw-steps" id="lzw-steps"></div>
+
+      <div class="section-header">
+        <h3>Oluşturulan Sözlük</h3>
+        <div class="section-line"></div>
+      </div>
+      <div class="lzw-dict" id="lzw-dict"></div>
+
+      <div class="section-header">
+        <h3>Kodlanmış Çıktı (Kod Dizisi)</h3>
+        <div class="section-line"></div>
+      </div>
+      <div class="encoded-output" id="lzw-encoded" style="color:var(--accent1);letter-spacing:4px;font-size:14px;font-weight:700"></div>
+    </div>
+  </div>
+
+  <!-- COMPARISON PANEL -->
+  <div class="panel" id="panel-compare">
+    <div class="input-section">
+      <label class="input-label">Karşılaştırma İçin Metin</label>
+      <div class="input-row">
+        <input type="text" class="text-input" id="cmp-input" value="AAAAABBBCDD" placeholder="Karşılaştırılacak metni girin...">
+        <button class="run-btn" onclick="runCompare()">▶ Karşılaştır</button>
+      </div>
+    </div>
+    <div id="cmp-results" style="display:none">
+      <div class="comparison">
+        <div class="compare-card huffman">
+          <h4>Huffman Encoding</h4>
+          <div id="cmp-huffman-rows"></div>
+        </div>
+        <div class="compare-card lzw">
+          <h4>LZW Encoding</h4>
+          <div id="cmp-lzw-rows"></div>
+        </div>
+      </div>
+      <div id="cmp-verdict" style="background:var(--surface);border:1px solid var(--border);padding:24px;text-align:center;font-family:'Syne',sans-serif;font-size:18px;font-weight:700"></div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
