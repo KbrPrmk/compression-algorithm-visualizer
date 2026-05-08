@@ -1,4 +1,9 @@
 # 🗜️ Compression Algorithm Visualizer
+![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-yellow?logo=javascript)
+![SVG](https://img.shields.io/badge/Rendering-SVG-orange)
+![Huffman](https://img.shields.io/badge/Algorithm-Huffman-darkgreen)
+![LZW](https://img.shields.io/badge/Algorithm-LZW-blueviolet)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
 An interactive visualizer for two fundamental lossless compression algorithms — **Huffman Encoding** and **LZW (Lempel-Ziv-Welch)** — with a built-in comparison mode. Built with vanilla HTML, CSS, and JavaScript.
 
